@@ -11,7 +11,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.3"
+    "cors": "^2.8.5",
+    "csv-parse": "^5.0.4",
+    "express": "^4.17.3",
+    "nasa-project": "file:.."
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
