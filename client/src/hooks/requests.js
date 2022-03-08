@@ -18,7 +18,7 @@ async function httpGetLaunches() {
 
 // Submit given launch data to launch system.
 async function httpSubmitLaunch(launch) {
-  // try/catch in case network is down and triggers an error
+  // try/catch in case unreliable internet connection or server rejects because of CORS
   try {
     // set method to post as fetch default to get
     return await fetch(`${API_URL}/launches`, {
@@ -33,9 +33,16 @@ async function httpSubmitLaunch(launch) {
   }
 }
 
+// Delete launch with given ID.
 async function httpAbortLaunch(id) {
-  // TODO: Once API is ready.
-  // Delete launch with given ID.
+  try {
+    return await fetch(`${API_URL}/launches/${id}`, {
+      method: "delete",
+    });
+  } catch (err) {
+    console.log(err);
+    return { ok: false };
+  }
 }
 
 export { httpGetPlanets, httpGetLaunches, httpSubmitLaunch, httpAbortLaunch };

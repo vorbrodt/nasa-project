@@ -19,6 +19,10 @@ function getAllLaunches() {
   return Array.from(launches.values());
 }
 
+function exsistsLaunchWithId(launchId) {
+  return launches.has(launchId);
+}
+
 function addNewLaunch(launch) {
   latestFlightNumber++;
   launches.set(
@@ -32,7 +36,18 @@ function addNewLaunch(launch) {
   );
 }
 
+function abortLaunchById(launchId) {
+  // launches.delete(launchId) would delete the data object
+  // instead save it in case we need it later
+  const aborted = launches.get(launchId);
+  aborted.upcoming = false;
+  aborted.success = false;
+  return aborted;
+}
+
 module.exports = {
   getAllLaunches,
   addNewLaunch,
+  exsistsLaunchWithId,
+  abortLaunchById,
 };
