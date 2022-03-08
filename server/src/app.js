@@ -17,11 +17,13 @@ app.use(
 );
 app.use(morgan("combined"));
 
+// handle json requests middleware (see req.body)
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "..", "public")));
 
-app.use(planetsRouter);
-app.use(launchesRouter);
+app.use("/planets", planetsRouter);
+// mount middleware on a specific path ("/launch") which will be the default
+app.use("/launches", launchesRouter);
 
 // inital page load in client
 app.get("/*", (req, res) => {
