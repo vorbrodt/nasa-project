@@ -74,5 +74,3 @@ describe("Test POST /launches", () => {
     });
   });
 });
-
-describe("Test DELETE /launches", () => {});
