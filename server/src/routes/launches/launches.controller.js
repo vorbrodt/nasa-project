@@ -28,7 +28,7 @@ function httpPostNewLaunch(req, res) {
   // isNaN checks if not a number
   if (isNaN(launch.launchDate)) {
     return res.status(400).json({
-      error: "Missing required launch property",
+      error: "Invalid launch date",
     });
   }
 
