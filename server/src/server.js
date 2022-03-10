@@ -14,6 +14,7 @@ const server = http.createServer(app);
 mongoose.connection.once("open", () => {
   console.log("MongoDB connection ready!");
 });
+// handle any potential errors in connection
 mongoose.connection.on("error", (err) => {
   console.log(err);
 });
