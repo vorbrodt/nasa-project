@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
-const MONGO_URL =
-  "mongodb+srv://nasa-api:ReRI5kOH8f7zQfp5@nasacluster.3zdb8.mongodb.net/nasa?retryWrites=true&w=majority";
+require('dotenv').config();
+
+const MONGO_URL = process.env.MONGO_URL;
 // import function loading the data
 
 // EventEmitter, emits events when connection is ready - .once means to only trigger 1 time
