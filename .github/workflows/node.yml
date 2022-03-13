@@ -19,7 +19,7 @@ jobs:
         #this will take multiple versions of node and test them. .x means latest available version of it
         #it creates 2 separate build jobs that run in parallell and goes through the entire workflow
         node-version: [14.x, 16.x]
-        mongodb-version: ["4.2", "4.4"]
+        mongodb-version: ["4.4"]
     # what os should this be run on
     runs-on: ubuntu-latest #could also do multiple: [ubuntu-latest, macos-latest, windows-latest]
     #here are the steps of the build job, here we define actiosn to run
