@@ -10,6 +10,7 @@ jobs:
   build:
     env: #set environment so it's not in watch mode allowing our tests to run
       CI: true # CI true is built in create-react-app script will know its a CI environment and disable watchmode for us so tests can run
+      MONGO_URL: mongodb://localhost/nasa # setup what mongoDB the tests should talk to
       #PORT: 8000;
 
     #We can run the build job in completely different environments, through the stategy and matrix option
@@ -18,6 +19,7 @@ jobs:
         #this will take multiple versions of node and test them. .x means latest available version of it
         #it creates 2 separate build jobs that run in parallell and goes through the entire workflow
         node-version: [14.x, 16.x]
+        mongodb-version: ["4.2", "4.4"]
     # what os should this be run on
     runs-on: ubuntu-latest #could also do multiple: [ubuntu-latest, macos-latest, windows-latest]
     #here are the steps of the build job, here we define actiosn to run
@@ -27,6 +29,10 @@ jobs:
         uses: actions/setup-node@v2 #setup node on the machine runnign this build
         with: # specifiy more about the action
           node-version: ${{matrix.node-version}} #had we written "16" would mean to use node version 16
+      - name: Use MongoDB from GitHub Actions
+        uses: supercharge/mongodb-github-action@1.7.0
+        with: # specifiy more about the action
+          node-version: ${{matrix.mongodb-version}}
       - run: npm install #here we specify a commands ourselves that we want the OS to run in the terminal
       - run: npm run build --prefix client #again this is our own command, this will run npm build in client folder
       - run: npm test
