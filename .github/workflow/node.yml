@@ -1,0 +1,23 @@
+name: NASA Project CI
+# on - means when should this workflow be triggered
+on:
+  push: ## when code is pushed or pull-request to one of these branches trigger the workflow
+    branches: [main]
+  pull_request:
+    branches: [main]
+# jobs that will run when events are triggered
+jobs:
+  build:
+    # what os should this be run on
+    runs-on: ubuntu-latest #could also do multiple: [ubuntu-latest, macos-latest, windows-latest]
+    #here are the steps of the build job, here we define actiosn to run
+    steps:
+      - uses: actions/checkout@v2 #checkout action, version 2, to checkout the latest code on our main branch
+      - name: Use Node.js version 16 #optional and simply makes it more understandable what is going on
+        uses: actions/setup-node@v2 #setup node on the machine runnign this build
+        with: # specifiy more about the action
+          node-version: "16" #use node version 16
+      - run: npm install #here we specify a commands ourselves that we want the OS to run in the terminal
+      - run: npm run build --prefix client #again this is our own command, this will run npm build in client folder
+  #deploy:
+  #needs: build #deploy needs build to succed before deploy can run
